@@ -1,0 +1,21 @@
+#!/bin/bash
+
+function showtime()
+{
+    tput clear
+    now=$(date +"%I:%M %P") # show HH:MM: PP
+    toilet -f 3d.flf $now | lolcat
+    sleep 60
+    showtime
+}
+
+# check figlet font file
+
+font=$(pwd)/3d.flf
+if [[ ! -f $font ]]; then
+    echo Font file doesn\'t exist, download it now.
+    wget https://raw.githubusercontent.com/xero/figlet-fonts/master/3d.flf
+fi
+
+
+gnome-terminal --title="lolclock" --geometry 55x10 -- bash -c "$(declare -f showtime); showtime; bash" &
