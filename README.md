@@ -1,6 +1,8 @@
 # lolclock
 gnome-terminal clock widget, ascii art font style.
 
+![lolclock](https://raw.githubusercontent.com/naiqus/lolclock/temp/lolclock.png)
+
 **Dependencies:**
  - `toilet`
  - `lolcat`
