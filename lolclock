@@ -19,5 +19,25 @@ if [[ ! -f $font ]]; then
     wget https://raw.githubusercontent.com/xero/figlet-fonts/master/3d.flf
 fi
 
+function help()
+{
+    echo ""
+    echo "lolclock usage: "
+    echo "          -h --help    : Check this help message."
+    echo "   -g --gnome-terminal : Open new gnome terminal window with lolclock." 
+    echo ""
+    exit 1
+}
 
-gnome-terminal --title="lolclock" --geometry 55x10 -- bash -c "$(declare -f showtime); showtime; bash" &
+case $1 in 
+    -g|--gnome-terminal)
+        gnome-terminal --title="lolclock" --geometry 55x10 -- bash -c "$(declare -f showtime); showtime; bash" &
+	;;
+    -h|--help)
+        help
+	;;
+    *)
+        tput clear
+	showtime
+	;;
+esac
