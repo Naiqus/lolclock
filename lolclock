@@ -4,16 +4,18 @@ function showtime()
 {
     tput clear
     now=$(date +"%I:%M %P") # show HH:MM: PP
+    second=$(date +"%S")
     toilet -f 3d.flf $now | lolcat
-    sleep 60
+    sleep $((60-$second))
     showtime
 }
 
 # check figlet font file
-
-font=$(pwd)/3d.flf
+fontpath=/usr/share/figlet
+font=$fontpath/3d.flf
 if [[ ! -f $font ]]; then
-    echo Font file doesn\'t exist, download it now.
+    cd $fontpath
+    echo Installing font file to $fontpath
     wget https://raw.githubusercontent.com/xero/figlet-fonts/master/3d.flf
 fi
 
