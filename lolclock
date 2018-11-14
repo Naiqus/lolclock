@@ -2,21 +2,38 @@
 
 function showtime()
 {
-    tput clear
-    now=$(date +"%I:%M %P") # show HH:MM: PP
-    second=$(date +"%S")
-    toilet -f 3d.flf $now | lolcat
-    sleep $((60-$second))
+    for font in $fontpath/*
+    do
+        tput clear
+        now=$(date +"%I:%M %P") # show HH:MM: PP
+        second=$(date +"%S")
+        toilet $now --font "$(echo $font | cut -d "/" -f 5 | cut -d "." -f 1)" | lolcat
+        sleep $((60-$second))
+        #echo $font
+        #sleep 1
+    done
     showtime
 }
 
 # check figlet font file
 fontpath=/usr/share/figlet
-font=$fontpath/3d.flf
+font=$fontpath/Varsity.flf
 if [[ ! -f $font ]]; then
     cd $fontpath
     echo Installing font file to $fontpath
-    wget https://raw.githubusercontent.com/xero/figlet-fonts/master/3d.flf
+    sudo wget https://raw.githubusercontent.com/xero/figlet-fonts/master/Varsity.flf
+    sudo wget https://raw.githubusercontent.com/xero/figlet-fonts/master/Train.flf
+    sudo wget https://raw.githubusercontent.com/xero/figlet-fonts/master/swampland.flf
+    sudo wget https://raw.githubusercontent.com/xero/figlet-fonts/master/starwars.flf
+    sudo wget https://raw.githubusercontent.com/xero/figlet-fonts/master/smbraille.tlf
+    sudo wget https://raw.githubusercontent.com/xero/figlet-fonts/master/Slant.flf
+    sudo wget https://raw.githubusercontent.com/xero/figlet-fonts/master/Rounded.flf
+    sudo wget https://raw.githubusercontent.com/xero/figlet-fonts/master/rev.flf
+    sudo wget https://raw.githubusercontent.com/xero/figlet-fonts/master/Rammstein.flf
+    sudo wget https://raw.githubusercontent.com/xero/figlet-fonts/master/pagga.tlf
+    sudo wget https://raw.githubusercontent.com/xero/figlet-fonts/master/Bolger.flf
+    sudo wget https://raw.githubusercontent.com/xero/figlet-fonts/master/Big Money-nw.flf
+    sudo wget https://raw.githubusercontent.com/xero/figlet-fonts/master/ANSI Shadow.flf
 fi
 
 function help()
